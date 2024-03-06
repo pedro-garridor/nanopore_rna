@@ -1,0 +1,23 @@
+'''
+Nanopore RNA-Seq workflow
+Copyright (C) 2024, Pedro Garrido Rodríguez
+'''
+
+import pandas as pd
+import re
+
+include: 'rules/align.smk'
+include: 'rules/bambu.smk'
+include: 'rules/fast5.smk'
+include: 'rules/m6anet.smk'
+include: 'rules/nanopolish.smk'
+include: 'rules/xpore.smk'
+
+input_table = pd.read_csv(config['manifest'], header=None)
+IDS = input_table.iloc[:, 0].to_list()
+SAMPLES = [re.sub(r'^.*_OM', 'OM', ID) for ID in IDS]
+
+rule all:
+    input:
+        m6anet=expand('results/m6anet/inference/{sample}', sample=SAMPLES),
+        xpore='results/xpore/diffmod'

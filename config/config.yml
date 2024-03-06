@@ -1,0 +1,12 @@
+# Nanopore RNA-Seq workflow
+# Copyright (C) 2024, Pedro Garrido Rodríguez
+
+input_dir: '..'
+out_dir: 'results'
+genome_dir: '/home/pgarrido/dorado_liver/hg38'
+ref_tx: 'workflow/resources/gencode.v45.annotation.gtf.gz'
+manifest: 'config/manifest.csv'
+xpore_diffmod: '../diffmod_livers.yml'
+summaries_dir: '../../liver_seq_sum'
+cdnacupcake_dir: '/home/pgarrido/cDNA_Cupcake'
+sqanti_dir: '../../SQANTI3-5.1'

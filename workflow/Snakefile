@@ -19,5 +19,6 @@ SAMPLES = [re.sub(r'^.*_OM', 'OM', ID) for ID in IDS]
 
 rule all:
     input:
+        bamslam=expand('results/bambu/BAM/BamSlam/{sample}_data.csv', sample=SAMPLES),
         m6anet=expand('results/m6anet/inference/{sample}', sample=SAMPLES),
         xpore='results/xpore/diffmod'

@@ -70,3 +70,23 @@ rule samtools_index_tx:
     output: protected('results/bambu/BAM/{sample}.bam.bai')
     conda: 'envs/samtools.yml'
     shell: 'samtools index {input}'
+
+rule bam_slam:
+    input:
+        bam='results/bambu/BAM/{sample}.bam',
+        bai='results/bambu/BAM/{sample}.bam.bai'
+    output:
+        coverage_fraction=protected('results/bambu/BAM/BamSlam/{sample}_coverage_fraction.pdf'),
+        csv=protected('results/bambu/BAM/BamSlam/{sample}_data.csv'),
+        density=protected('results/bambu/BAM/BamSlam/{sample}_density.pdf'),
+        read_accuracy=protected('results/bambu/BAM/BamSlam/{sample}_read_accuracy.pdf'),
+        sec_alns=protected('results/bambu/BAM/BamSlam/{sample}_sec_alns.pdf'),
+        stats=protected('results/bambu/BAM/BamSlam/{sample}_stats.csv'),
+        tx_length_distr_per_tx=protected('results/bambu/BAM/BamSlam/{sample}_transcript_length_distribution_per_distinct_transcript.pdf'),
+        tx_length_distr_per_read=protected('results/bambu/BAM/BamSlam/{sample}_transcript_length_distribution_per_read.pdf'),
+        tx_level_data=protected('results/bambu/BAM/BamSlam/{sample}_transcript_level_data.csv')
+    conda: 'envs/bamslam.yml'
+    params:
+        bamslam_script='workflow/scripts/BamSlam.R'
+    shell: 'Rscript {params.bamslam_script} rna {input.bam} results/bambu/BAM/BamSlam/{wildcards.sample}'
+    

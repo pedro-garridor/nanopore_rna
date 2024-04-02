@@ -27,7 +27,7 @@ rule xpore_diffmod_postprocessing:
         config=config['xpore_diffmod']
     output: protected(directory(config['out_dir']+'/xpore/diffmod'))
     threads: workflow.cores/2
-    conda: '/home/pgarrido/mamba_envs_yaml/xpore.yml'
+    conda: '../envs/xpore.yml'
     shell:
         '''
         xpore diffmod \

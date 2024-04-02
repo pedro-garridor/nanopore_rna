@@ -5,12 +5,12 @@ Copyright (C) 2024, Pedro Garrido Rodríguez
 
 rule xpore_dataprep:
     input:
-        eventalign='results/eventalign/{sample}.txt',
-        gtf='results/bambu/sqanti_filter/extended_annotations.filtered.gtf',
-        fasta='results/bambu/sqanti_filter/extended_annotations.filtered.fasta'
-    output: temp(directory('results/xpore/dataprep/{sample}'))
+        eventalign=config['out_dir']+'/eventalign/{sample}.txt',
+        gtf=config['out_dir']+'/bambu/sqanti_filter/extended_annotations.filtered.gtf',
+        fasta=config['out_dir']+'/bambu/sqanti_filter/extended_annotations.filtered.fasta'
+    output: temp(directory(config['out_dir']+'/xpore/dataprep/{sample}'))
     threads: workflow.cores/4
-    conda: 'envs/xpore.yml'
+    conda: '../envs/xpore.yml'
     shell:
         '''
         xpore dataprep \
@@ -23,9 +23,9 @@ rule xpore_dataprep:
 
 rule xpore_diffmod_postprocessing:
     input:
-        samples=expand('results/xpore/dataprep/{sample}', sample=SAMPLES),
+        samples=expand(config['out_dir']+'/xpore/dataprep/{sample}', sample=SAMPLES),
         config=config['xpore_diffmod']
-    output: protected(directory('results/xpore/diffmod'))
+    output: protected(directory(config['out_dir']+'/xpore/diffmod'))
     threads: workflow.cores/2
     conda: '/home/pgarrido/mamba_envs_yaml/xpore.yml'
     shell:

@@ -1,0 +1,10 @@
+# Nanopore RNA-Seq workflow
+# Copyright (C) 2024, Pedro Garrido Rodríguez
+
+input_dir: '../input'
+out_dir: 'results'
+genome_dir: '/home/pgarrido/hg38'
+ref_tx: 'resources/gencode.v45.annotation.gtf.gz'
+xpore_diffmod: '../diffmod.yml'
+cdnacupcake_dir: '/home/pgarrido/cDNA_Cupcake'
+sqanti_dir: '/home/pgarrido/SQANTI3-5.1'

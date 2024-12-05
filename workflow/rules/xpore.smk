@@ -24,7 +24,7 @@ rule xpore_dataprep:
 rule xpore_diffmod_postprocessing:
     input:
         samples=expand(config['out_dir']+'/xpore/dataprep/{sample}', sample=SAMPLES),
-        config=config['xpore_diffmod']
+        config=config['input_dir']+'/diffmod.yml'
     output: protected(directory(config['out_dir']+'/xpore/diffmod'))
     threads: workflow.cores/2
     conda: '../envs/xpore.yml'

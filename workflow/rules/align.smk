@@ -10,7 +10,7 @@ rule fastq:
 
 rule minimap2_genome:
     input:
-        genome=config['genome_dir']+'/hg38.fa',
+        genome=config['ref']+'/hg38.fa',
         fastq=config['out_dir']+'/FASTQ/{sample}.fq'
     output: temp(config['out_dir']+'/BAM/{sample}.sam')
     threads: workflow.cores/2

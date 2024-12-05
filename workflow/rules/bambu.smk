@@ -7,7 +7,7 @@ SAMPLES = glob_wildcards(config['input_dir']+'/{sample,[^/]+}').sample
 
 rule bambu:
     input:
-        genome=config['genome_dir']+'/hg38.fa',
+        genome=config['ref']+'/hg38.fa',
         ref_tx=config['ref_tx'],
         bam=expand(config['out_dir']+'/BAM/{sample}.bam', sample=SAMPLES),
         bai=expand(config['out_dir']+'/BAM/{sample}.bam.bai', sample=SAMPLES)
@@ -36,7 +36,7 @@ rule sqanti_qc:
     input: 
         bambu_gtf=config['out_dir']+'/bambu/extended_annotations.gtf',
         ref_tx=config['ref_tx'],
-        genome=config['genome_dir']+'/hg38.fa'
+        genome=config['ref']+'/hg38.fa'
     output:
         GMST=protected(directory(config['out_dir']+'/bambu/sqanti_qc/GMST')),
         RTS=protected(directory(config['out_dir']+'/bambu/sqanti_qc/RTS')),
@@ -79,14 +79,11 @@ rule sqanti_filter:
         fasta=protected(config['out_dir']+'/bambu/sqanti_filter/extended_annotations.filtered.fasta'),
         gtf=protected(config['out_dir']+'/bambu/sqanti_filter/extended_annotations.filtered.gtf'),
         params=protected(config['out_dir']+'/bambu/sqanti_filter/extended_annotations.params.txt')
-    conda: '../envs/SQANTI3_env_fixed.yml'
+    conda: config['sqanti_dir'] + '/SQANTI3.conda_env.yml'
     params:
         sqanti_dir=config['sqanti_dir'],
-        cdnacupcake_dir=config['cdnacupcake_dir']
     shell:
         '''
-        export PYTHONPATH={params.cdnacupcake_dir}/
-        export PYTHONPATH=$PYTHONPATH:{params.cdnacupcake_dir}/sequence/
         {params.sqanti_dir}/sqanti3_filter.py rules \
             {input.classification} \
             --isoforms  {input.fasta} \

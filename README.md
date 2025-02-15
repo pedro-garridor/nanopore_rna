@@ -1,7 +1,7 @@
 # nanopore_rna
 Identification of novel transcripts and epitranscriptome profiling for nanopore RNA-Seq experiments
 
-`nanopore_rna` is a transcriptona and epitranscriptome pipeline for nanopore RNA-Seq experiments.
+`nanopore_rna` is a transcriptome and epitranscriptome pipeline for nanopore RNA-Seq experiments.
 
 This implementation allows the analysis of nanopore RNA-Seq raw data (from FASTQ and POD5) either on local workstations, as well as in shared servers or clusters, **without requiring admin permissions** to run it.
 
@@ -26,7 +26,7 @@ Changing `<MINIFORGE_VERSION>` with the latest version available.
     git clone https://github.com/pedro-garridor/nanopore_rna.git
     
 
-**3.** For this step, install SingularityCE, move into `nanopore_rna`, install SingularityCE and build the pipeline image. You will need to do this last thing as a privileged user in your local computer. However, once you build it you will be able to copy the image to another computer and use it without sudo permissions:
+**3.** For this step, install SingularityCE, move into `nanopore_rna` and build the pipeline image. You will need to do this last thing as a privileged user in your local computer. However, once you build it you will be able to copy the image to another computer and use it without sudo permissions:
 
     wget https://github.com/sylabs/singularity/releases/download/v4.2.1/singularity-ce_4.2.1-noble_amd64.deb
     sudo apt install -y singularity-ce_4.2.1-noble_amd64.deb
@@ -58,7 +58,7 @@ where:
 - `<DIFFMOD_YML>`: YML file with the grouping of your samples for xPore.
 - `<THREADS>`: threads you want the pipeline to use.
 
-As an example, the `<REFERENCE_TRANSCRIPTOME>` file needs to have a format like the following:
+As an example, the `<DIFFMOD_YML>` file needs to have a format like the following:
 
     data:
         GROUP_A:

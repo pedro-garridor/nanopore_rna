@@ -86,4 +86,4 @@ Finally, if you need more information on how to run the pipeline, you can run:
 
 This pipeline is part of my PhD Thesis. If you're using it, please cite it :)
 
-> P. Garrido-Rodríguez, “Aplicación de la bioinformática en la descripción y resolución de patologías hematológicas y mecanismos biológicos relacionados,” Ph.D dissertation, Universidad de Murcia.
+> P. Garrido-Rodríguez, “Aplicación de la bioinformática en la descripción y resolución de patologías hematológicas y mecanismos biológicos relacionados,” Ph.D dissertation, Universidad de Murcia, Spain, 2025. [https://digitum.um.es/digitum/handle/10201/152160](https://digitum.um.es/digitum/handle/10201/152160)
